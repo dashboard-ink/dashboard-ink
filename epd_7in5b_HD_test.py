@@ -1,12 +1,16 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding:utf-8 -*-
 import sys
 import os
-libdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'lib')
-if os.path.exists(libdir):
-    sys.path.append(libdir)
 
 import logging
+import sys
+libdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'lib')
+print(libdir)
+if os.path.exists(libdir):
+    print('Apending lib path')
+    sys.path.append(libdir)
+
 from waveshare_epd import epd7in5b_HD
 import time
 from PIL import Image,ImageDraw,ImageFont
