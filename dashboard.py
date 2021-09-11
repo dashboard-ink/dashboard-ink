@@ -6,12 +6,14 @@ import os
 import logging
 import sys
 libdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'lib')
+print(libdir)
 if os.path.exists(libdir):
+    print('Apending lib path')
     sys.path.append(libdir)
 
 from waveshare_epd import epd7in5b_HD
 import time
-from Pillow import Image,ImageDraw,ImageFont
+from PIL import Image,ImageDraw,ImageFont
 import traceback
 
 logging.basicConfig(level=logging.DEBUG)
