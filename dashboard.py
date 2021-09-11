@@ -5,11 +5,16 @@ import os
 
 import logging
 import sys
-libdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'lib')
-if os.path.exists(libdir):
-    sys.path.append(libdir)
+lib_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'lib')
+core_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'core')
+if os.path.exists(lib_dir):
+    sys.path.append(lib_dir)
+
+if os.path.exists(core_dir):
+    sys.path.append(core_dir)
 
 from waveshare_epd import epd7in5b_HD
+from core import fonts
 import time
 from datetime import datetime
 from PIL import Image,ImageDraw,ImageFont
@@ -26,10 +31,6 @@ try:
     epd.init()
     epd.Clear()
 
-    font24 = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf", 32)
-    font18 = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf", 18)
-    font12 = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf", 12)
-
     # Drawing on the Vertical image
     logging.info("Drawing dashboard...")
     black_image = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
@@ -39,9 +40,9 @@ try:
 
     current_date = datetime.now()
 
-    draw_black_image.text((2, 0), current_date.strftime('%Y-%m-%d'), font = font24, fill = 0)
-    draw_black_image.text((100, 0), 'Updated at' + current_date.strftime("%Y-%m-%d %H:%M:%S"), font = font12, fill = 0)
-    draw_red_image.text((2, 20), '7.5inch epd', font = font18, fill = 0)
+    draw_black_image.text((2, 0), current_date.strftime('%Y-%m-%d'), font = fonts.font24, fill = 0)
+    draw_black_image.text((100, 0), 'Updated at' + current_date.strftime("%Y-%m-%d %H:%M:%S"), font = fonts.font12, fill = 0)
+    draw_red_image.text((2, 30), '7.5inch epd', font = fonts.font18, fill = 0)
     epd.display(epd.getbuffer(black_image), epd.getbuffer(red_image))
     time.sleep(10)
     
