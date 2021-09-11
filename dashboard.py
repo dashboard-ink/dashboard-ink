@@ -12,7 +12,7 @@ if os.path.exists(libdir):
 from waveshare_epd import epd7in5b_HD
 import time
 from datetime import datetime
-from Pillow import Image,ImageDraw,ImageFont
+from PIL import Image,ImageDraw,ImageFont
 import traceback
 
 logging.basicConfig(level=logging.DEBUG)
