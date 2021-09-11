@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 pillow = "8.3.2"
 spidev = "3.5"
+"rpi.gpio" = "0.7"
 
 [dev-packages]
 
