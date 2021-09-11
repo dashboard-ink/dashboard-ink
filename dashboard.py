@@ -29,13 +29,13 @@ logging.basicConfig(level=logging.DEBUG)
 try:
     logging.info("Dashboard demo")
 
+    epd = epd7in5b_HD.EPD()
     black_image = Image.new('1', (epd.height, epd.width), 255)
     red_image = Image.new('1', (epd.height, epd.width), 255)
     draw_black_image = ImageDraw.Draw(black_image)
     draw_red_image = ImageDraw.Draw(red_image)
     title_plugin = title_bar.TitleBar(0, 0)
     title_plugin.draw(draw_black_image, draw_red_image)
-    epd = epd7in5b_HD.EPD()
 
     logging.info("init and Clear")
     epd.init()
