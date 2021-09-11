@@ -40,7 +40,7 @@ try:
     current_date = datetime.now()
 
     draw_black_image.text((2, 0), current_date.strftime('%Y-%m-%d'), font = font24, fill = 0)
-    draw_black_image.text((100, 0), 'Updated at' + current_date, font = font12, fill = 0)
+    draw_black_image.text((100, 0), 'Updated at' + current_date.strftime("%Y-%m-%d %H:%M:%S"), font = font12, fill = 0)
     draw_red_image.text((2, 20), '7.5inch epd', font = font18, fill = 0)
     epd.display(epd.getbuffer(black_image), epd.getbuffer(red_image))
     time.sleep(10)
