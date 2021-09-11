@@ -17,7 +17,7 @@ from waveshare_epd import epd7in5b_HD
 from core import fonts
 import time
 from datetime import datetime
-from PIL import Image,ImageDraw,ImageFont
+from PIL import Image,ImageDraw
 import traceback
 
 logging.basicConfig(level=logging.DEBUG)
