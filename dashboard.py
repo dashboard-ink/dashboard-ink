@@ -11,7 +11,8 @@ if os.path.exists(libdir):
 
 from waveshare_epd import epd7in5b_HD
 import time
-from PIL import Image,ImageDraw,ImageFont
+from datetime import datetime
+from Pillow import Image,ImageDraw,ImageFont
 import traceback
 
 logging.basicConfig(level=logging.DEBUG)
@@ -27,16 +28,21 @@ try:
 
     font24 = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf", 32)
     font18 = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf", 18)
+    font12 = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf", 12)
 
     # Drawing on the Vertical image
     logging.info("Drawing dashboard...")
-    Limage = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
-    Limage_Other = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
-    draw_Himage = ImageDraw.Draw(Limage)
-    draw_Himage_Other = ImageDraw.Draw(Limage_Other)
-    draw_Himage_Other.text((2, 0), '2020-07-12', font = font24, fill = 0)
-    draw_Himage.text((2, 20), '7.5inch epd', font = font18, fill = 0)
-    epd.display(epd.getbuffer(Limage), epd.getbuffer(Limage_Other))
+    black_image = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
+    red_image = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
+    draw_black_image = ImageDraw.Draw(black_image)
+    draw_red_image = ImageDraw.Draw(red_image)
+
+    current_date = datetime.now()
+
+    draw_black_image.text((2, 0), current_date.strftime('%Y-%m-%d'), font = font24, fill = 0)
+    draw_black_image.text((100, 0), 'Updated at' + current_date, font = font12, fill = 0)
+    draw_red_image.text((2, 20), '7.5inch epd', font = font18, fill = 0)
+    epd.display(epd.getbuffer(black_image), epd.getbuffer(red_image))
     time.sleep(10)
     
 
